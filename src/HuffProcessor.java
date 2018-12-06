@@ -78,7 +78,6 @@ public class HuffProcessor {
 		for(int i = 0; i < freq.length; i++) {
 			if(freq[i] > 0) {
 				 pq.add(new HuffNode(i,freq[i],null,null));
-
 			}
 		}
 
@@ -121,10 +120,10 @@ public class HuffProcessor {
 		}
 		else {
 			out.writeBits(BITS_PER_WORD+1, 1);
-			return;
 		}
 	}
 
+	
 	private void writeCompressedBits(String[] encoding, BitInputStream in, BitOutputStream out) {
 		while(true) {
 			int bit = in.readBits(8);
