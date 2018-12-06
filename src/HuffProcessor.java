@@ -85,7 +85,7 @@ public class HuffProcessor {
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
-		    HuffNode t = new HuffNode(1,left.myWeight+right.myWeight,left, right);
+		    HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left, right);
 		    pq.add(t);
 		}
 		
@@ -102,7 +102,7 @@ public class HuffProcessor {
 	
 	private void codingHelper(HuffNode root, String path, String[] encodings) { 
 		
-		if (root.myValue != -1) {
+		if (root.myValue != 0) {
 	        encodings[root.myValue] = path;
 	        return;
 		}
@@ -114,7 +114,7 @@ public class HuffProcessor {
 
 	
 	private void writeHeader(HuffNode root, BitOutputStream out){
-		if (root.myValue == -1) {
+		if (root.myValue == 0) {
 			out.writeBits(BITS_PER_WORD+1, 0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
@@ -136,7 +136,7 @@ public class HuffProcessor {
 		out.writeBits(code.length(), Integer.parseInt(code,2));
 	}
 	
-	//////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	/**
