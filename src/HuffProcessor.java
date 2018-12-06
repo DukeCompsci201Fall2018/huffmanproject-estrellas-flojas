@@ -75,8 +75,12 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		for(int index = 0; index < freq.length; index++) {
+		int index = 0; 
+		if (freq[index] > 0) {
+			if (index <= 257) {
 		    pq.add(new HuffNode(index,freq[index],null,null));
+		    index ++;
+			}
 		}
 
 		while (pq.size() > 1) {
@@ -86,8 +90,7 @@ public class HuffProcessor {
 		    pq.add(t);
 		}
 		
-		HuffNode root = pq.remove();
-		return root;
+		return pq.remove();
 	}
 	
 	
@@ -122,7 +125,7 @@ public class HuffProcessor {
 			return;
 		}
 	}
-	
+
 	private void writeCompressedBits(String[] encoding, BitInputStream in, BitOutputStream out) {
 		while(true) {
 			int bit = in.readBits(8);
