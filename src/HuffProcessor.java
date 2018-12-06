@@ -75,11 +75,10 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		int index = 0; 
-		if (freq[index] > 0) {
-			if (index <= 257) {
-		    pq.add(new HuffNode(index,freq[index],null,null));
-		    index ++;
+		for(int i = 0; i < freq.length; i++) {
+			if(freq[i] > 0) {
+				 pq.add(new HuffNode(i,freq[i],null,null));
+
 			}
 		}
 
