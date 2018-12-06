@@ -62,7 +62,7 @@ public class HuffProcessor {
 		int[] freq = new int[ALPH_SIZE+1];
 		
 		while (true){
-			int val = in.readBits(BITS_PER_WORD+1);	
+			int val = in.readBits(BITS_PER_WORD);	
 			if (val == -1) break;
 			freq[val]++;
 		}
@@ -112,13 +112,14 @@ public class HuffProcessor {
 
 	
 	private void writeHeader(HuffNode root, BitOutputStream out){
-		if (root.myRight != null && root.myLeft != null) {
+		if (root.myValue == -1) {
 			out.writeBits(BITS_PER_WORD+1, 0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
 		}
 		else {
 			out.writeBits(BITS_PER_WORD+1, 1);
+			return;
 		}
 	}
 	
