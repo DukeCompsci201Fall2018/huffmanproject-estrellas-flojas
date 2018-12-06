@@ -56,19 +56,19 @@ public class HuffProcessor {
 		in.reset();
 		writeCompressedBits(codings, in, out);
 		out.close();
-		
 	}
 	
 	private int[] readForCounts(BitInputStream in) {
 		int[] freq = new int[ALPH_SIZE+1];
 		freq[PSEUDO_EOF] = 1;
 		
-		int update = 0;
-		while (true){
-			int val = in.readBits(BITS_PER_WORD);
-			if (val == -1) break;
-			freq[BITS_PER_WORD+update] = val;
-			update++;
+		for (int update = 0; update < 257; update++) {
+			while (true){
+				int val = in.readBits(BITS_PER_WORD);
+				if (val == -1) break;
+				freq[BITS_PER_WORD+update] = val;
+				update++;
+			}
 		}
 		return freq;
 	}
