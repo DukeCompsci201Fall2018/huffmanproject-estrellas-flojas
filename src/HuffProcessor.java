@@ -58,6 +58,7 @@ public class HuffProcessor {
 		out.close();
 	}
 	
+	
 	private int[] readForCounts(BitInputStream in) {
 		int[] freq = new int[ALPH_SIZE+1];
 		
@@ -75,16 +76,16 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		for(int i = 0; i < freq.length; i++) {
-			if(freq[i] > 0) {
-				 pq.add(new HuffNode(i,freq[i],null,null));
+		for(int index = 0; index < freq.length; index++) {
+			if(freq[index] > 0) {
+				 pq.add(new HuffNode(index,freq[index],null,null));
 			}
 		}
 
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
-		    HuffNode t = new HuffNode(-1,left.myWeight+right.myWeight,left, right);
+		    HuffNode t = new HuffNode(1,left.myWeight+right.myWeight,left, right);
 		    pq.add(t);
 		}
 		
