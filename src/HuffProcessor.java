@@ -75,7 +75,7 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		for(int index = 0; index < freq.length; index++) {
+		for(int index = -1; index < freq.length; index++) {
 		    pq.add(new HuffNode(index,freq[index],null,null));
 		}
 
@@ -100,7 +100,7 @@ public class HuffProcessor {
 	
 	private void codingHelper(HuffNode root, String path, String[] encodings) { 
 		
-		if (root.myValue != 0) {
+		if (root.myValue != -1) {
 	        encodings[root.myValue] = path;
 	        return;
 		}
