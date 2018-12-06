@@ -62,13 +62,12 @@ public class HuffProcessor {
 		int[] freq = new int[ALPH_SIZE+1];
 		freq[PSEUDO_EOF] = 1;
 		
-		for (int update = 0; update < 256; update++) {
-			while (true){
-				int val = in.readBits(BITS_PER_WORD);
-				if (val == -1) break;
-				freq[BITS_PER_WORD+update] = val;
-				update++;
-			}
+		int update = 0;
+		while (true){
+			int val = in.readBits(BITS_PER_WORD);
+			if (val == -1) break;
+			freq[BITS_PER_WORD+update] = val;
+			update++;
 		}
 		return freq;
 	}
@@ -79,7 +78,7 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		for(int index = 0; index < counts.length; index++) {
+		for(int index = 0; index < counts.length-1; index++) {
 		    pq.add(new HuffNode(index,freq[index],null,null));
 		}
 
