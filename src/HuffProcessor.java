@@ -62,7 +62,7 @@ public class HuffProcessor {
 		int[] freq = new int[ALPH_SIZE+1];
 		freq[PSEUDO_EOF] = 1;
 		
-		for (int update = 0; update < 257; update++) {
+		for (int update = 0; update < 256; update++) {
 			while (true){
 				int val = in.readBits(BITS_PER_WORD);
 				if (val == -1) break;
