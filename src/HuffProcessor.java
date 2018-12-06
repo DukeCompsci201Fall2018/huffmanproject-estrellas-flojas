@@ -75,14 +75,14 @@ public class HuffProcessor {
 		
 		PriorityQueue<HuffNode> pq = new PriorityQueue<>();
 
-		for(int index = -1; index < freq.length; index++) {
+		for(int index = 0; index < freq.length; index++) {
 		    pq.add(new HuffNode(index,freq[index],null,null));
 		}
 
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
-		    HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left, right);
+		    HuffNode t = new HuffNode(-1,left.myWeight+right.myWeight,left, right);
 		    pq.add(t);
 		}
 		
