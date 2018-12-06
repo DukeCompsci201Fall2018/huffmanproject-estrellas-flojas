@@ -125,7 +125,7 @@ public class HuffProcessor {
 	}
 	
 	private void writeCompressedBits(String[] encoding, BitInputStream in, BitOutputStream out) {
-		for(int k = 0; k < 258; k++) {
+		for(int k = 0; k < 257; k++) {
 			String code = encoding[(char) k];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
 		}
