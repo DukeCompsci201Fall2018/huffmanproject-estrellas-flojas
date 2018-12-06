@@ -62,7 +62,7 @@ public class HuffProcessor {
 		int[] freq = new int[ALPH_SIZE+1];
 		
 		while (true){
-			int val = in.readBits(BITS_PER_WORD+1);	
+			int val = in.readBits(BITS_PER_WORD);	
 			if (val == -1) break;
 			freq[val]++;
 		}
@@ -93,20 +93,21 @@ public class HuffProcessor {
 	
 	private String[] makeCodingsFromTree(HuffNode root) {
 		String[] encodings = new String[ALPH_SIZE + 1];
-	    return codingHelper(root,"",encodings);
+	    codingHelper(root,"",encodings);
+	    return encodings;
 	}
 	
 	
-	private String[] codingHelper(HuffNode root, String path, String[] encodings) { 
+	private void codingHelper(HuffNode root, String path, String[] encodings) { 
 		
-		if (root.myLeft == null && root.myRight == null) {
+		if (root.myValue != 0) {
 	        encodings[root.myValue] = path;
+	        return;
 		}
 		else {
 			codingHelper(root.myLeft, path + "0", encodings);
 			codingHelper(root.myRight, path + "1", encodings);
 		}
-		return encodings;
 	}
 
 	
