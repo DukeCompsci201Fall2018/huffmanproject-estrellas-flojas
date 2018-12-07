@@ -48,7 +48,6 @@ public class HuffProcessor {
 
 		int[] counts = readForCounts(in);
 		HuffNode root = makeTreeFromCounts(counts);
-		if (root==null) System.out.println("what the heck");
 		String[] codings = makeCodingsFromTree(root);
 		
 		out.writeBits(BITS_PER_INT, HUFF_TREE);
@@ -103,7 +102,7 @@ public class HuffProcessor {
 	
 	
 	private String[] codingHelper(HuffNode root, String path, String[] encodings) { 
-		if (root==null) System.out.println("tree is null");
+		if (root!=null) {
 		if (root.myValue > 0) {
 	        encodings[root.myValue] = path;
 	        return encodings;
@@ -113,6 +112,8 @@ public class HuffProcessor {
 			encodings = codingHelper(root.myRight, path + "1", encodings);
 			return encodings;
 		}
+		}
+		return encodings;
 	}
 
 	
