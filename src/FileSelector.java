@@ -15,6 +15,7 @@ import javax.swing.filechooser.FileFilter;
  *         This software is licensed with an Apache 2 license, see
  *         http://www.apache.org/licenses/LICENSE-2.0 for details.
  */
+
 class FileSelector {
     // result of selection
     private static File[] ourFiles;

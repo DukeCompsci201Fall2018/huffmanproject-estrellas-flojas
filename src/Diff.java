@@ -75,6 +75,7 @@ public class Diff
                     }
                 }
             });
+            
             return ourFiles;
         } catch (Exception e) {
             // it is still an exception, just not one required to be handled
