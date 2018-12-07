@@ -101,7 +101,7 @@ public class HuffProcessor {
 	
 	
 	private void codingHelper(HuffNode root, String path, String[] encodings) { 
-		
+		if (root==null) System.out.println("tree is null");
 		if (root.myValue != 0) {
 	        encodings[root.myValue] = path;
 	        return;
