@@ -48,6 +48,7 @@ public class HuffProcessor {
 
 		int[] counts = readForCounts(in);
 		HuffNode root = makeTreeFromCounts(counts);
+		if (root==null) System.out.println("what the heck");
 		String[] codings = makeCodingsFromTree(root);
 		
 		out.writeBits(BITS_PER_INT, HUFF_TREE);
@@ -68,9 +69,7 @@ public class HuffProcessor {
 			freq[val]++;
 		}
 		freq[PSEUDO_EOF] = 1;
-		for (int i=0; i<freq.length; i++) {
-			if (freq[i]>0) System.out.println("char counted");
-		}
+		
 		return freq;
 	}
 	
@@ -84,7 +83,7 @@ public class HuffProcessor {
 				 pq.add(new HuffNode(index,freq[index],null,null));
 			}
 		}
-
+		System.out.println("pq has this number of elements: "+pq.size());
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
