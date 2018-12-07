@@ -115,12 +115,12 @@ public class HuffProcessor {
 	
 	private void writeHeader(HuffNode root, BitOutputStream out){
 		if (root.myValue == 0) {
-			out.write(0);
+			out.writeBits(1,0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
 		}
 		else {
-			out.write(1); //shoot a 1 into the output stream
+			out.writeBits(1,1); //shoot a 1 into the output stream
 			out.writeBits(BITS_PER_WORD+1, root.myValue); //changed to root.myValue
 		}
 	}
