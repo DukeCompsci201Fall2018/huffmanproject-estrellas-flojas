@@ -82,7 +82,7 @@ public class HuffProcessor {
 				 pq.add(new HuffNode(index,freq[index],null,null));
 			}
 		}
-		System.out.println("pq has this number of elements: "+pq.size());
+		
 		while (pq.size() > 1) {
 		    HuffNode left = pq.remove();
 		    HuffNode right = pq.remove();
@@ -90,7 +90,7 @@ public class HuffProcessor {
 		    pq.add(t);
 		}
 		HuffNode root = pq.remove();
-		if (root==null) System.out.println("problem in makeTree");
+		
 		return root;
 	}
 	
@@ -98,9 +98,7 @@ public class HuffProcessor {
 	private String[] makeCodingsFromTree(HuffNode root) {
 		String[] encodings = new String[ALPH_SIZE + 1];
 	    encodings = codingHelper(root,"",encodings);
-	    for (int i=0; i<encodings.length; i++) {
-	    		if (encodings[i]!=null) System.out.println("encoding formed index of " + i);
-	    }
+	    
 	    return encodings;
 	}
 	
@@ -108,19 +106,19 @@ public class HuffProcessor {
 	private String[] codingHelper(HuffNode root, String path, String[] encodings) { 
 		if (root!=null) {
 		if (root.myValue >= 0) {
-			System.out.println("value of root: "+root.myValue);
+			
 	        encodings[root.myValue] = path;
 	        return encodings;
 		}
 		else {
-			System.out.println("check left");
+			
 			encodings = codingHelper(root.myLeft, path + "0", encodings);
-			System.out.println("check right");
+		
 			encodings = codingHelper(root.myRight, path + "1", encodings);
 			return encodings;
 		}
 		}
-		System.out.println("null root");
+
 		return encodings;
 	}
 
