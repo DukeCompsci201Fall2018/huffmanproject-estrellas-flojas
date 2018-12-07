@@ -115,19 +115,20 @@ public class HuffProcessor {
 	
 	private void writeHeader(HuffNode root, BitOutputStream out){
 		if (root.myValue == 0) {
-			out.writeBits(BITS_PER_WORD+1, 0);
+			out.write(0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
 		}
 		else {
-			out.writeBits(BITS_PER_WORD+1, 1);
+			out.write(1); //shoot a 1 into the output stream
+			out.writeBits(BITS_PER_WORD+1, root.myValue); //changed to root.myValue
 		}
 	}
 
 	
 	private void writeCompressedBits(String[] encoding, BitInputStream in, BitOutputStream out) {
 		while(true) {
-			int bit = in.readBits(8);
+			int bit = in.readBits(BITS_PER_WORD);
 			if (bit == -1) break;
 			String code = encoding[bit];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
