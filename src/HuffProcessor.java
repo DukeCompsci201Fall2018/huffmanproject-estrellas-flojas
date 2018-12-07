@@ -89,30 +89,37 @@ public class HuffProcessor {
 		    HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left, right);
 		    pq.add(t);
 		}
-		
-		return pq.remove();
+		HuffNode root = pq.remove();
+		if (root==null) System.out.println("problem in makeTree");
+		return root;
 	}
 	
 	
 	private String[] makeCodingsFromTree(HuffNode root) {
 		String[] encodings = new String[ALPH_SIZE + 1];
 	    encodings = codingHelper(root,"",encodings);
+	    for (int i=0; i<encodings.length; i++) {
+	    		if (encodings[i]!=null) System.out.println("encoding formed");
+	    }
 	    return encodings;
 	}
 	
 	
 	private String[] codingHelper(HuffNode root, String path, String[] encodings) { 
 		if (root!=null) {
-		if (root.myValue > 0) {
+		if (root.myValue != 0) {
 	        encodings[root.myValue] = path;
 	        return encodings;
 		}
 		else {
+			System.out.println("check left");
 			encodings = codingHelper(root.myLeft, path + "0", encodings);
+			System.out.println("check right");
 			encodings = codingHelper(root.myRight, path + "1", encodings);
 			return encodings;
 		}
 		}
+		System.out.println("null root");
 		return encodings;
 	}
 
