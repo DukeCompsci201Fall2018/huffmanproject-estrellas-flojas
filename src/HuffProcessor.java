@@ -98,27 +98,22 @@ public class HuffProcessor {
 	private String[] makeCodingsFromTree(HuffNode root) {
 		String[] encodings = new String[ALPH_SIZE + 1];
 	    encodings = codingHelper(root,"",encodings);
-	    
 	    return encodings;
 	}
 	
 	
 	private String[] codingHelper(HuffNode root, String path, String[] encodings) { 
 		if (root!=null) {
-		if (root.myValue >= 0) {
-			
-	        encodings[root.myValue] = path;
-	        return encodings;
+			if (root.myValue >= 0) {
+		        encodings[root.myValue] = path;
+		        return encodings;
+			}
+			else {
+				encodings = codingHelper(root.myLeft, path + "0", encodings);
+				encodings = codingHelper(root.myRight, path + "1", encodings);
+				return encodings;
+			}
 		}
-		else {
-			
-			encodings = codingHelper(root.myLeft, path + "0", encodings);
-		
-			encodings = codingHelper(root.myRight, path + "1", encodings);
-			return encodings;
-		}
-		}
-
 		return encodings;
 	}
 
